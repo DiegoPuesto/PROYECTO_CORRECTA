@@ -4,4 +4,5 @@ export declare class CatsService {
     private catsRepository;
     constructor(catsRepository: Repository<Cat>);
     findAll(): Promise<Cat[]>;
+    create(catData: any): Promise<Cat[]>;
 }

@@ -10,8 +10,13 @@ export class CatsService {
     private catsRepository: Repository<Cat>,
   ) {}
 
-  // Este método ahora hace una consulta real a la base de datos
   async findAll(): Promise<Cat[]> {
     return await this.catsRepository.find();
+  }
+
+  // Asegúrate de que este método esté dentro de las llaves { } de la clase CatsService
+  async create(catData: any): Promise<Cat[]> {
+    const newCats:Cat[] = this.catsRepository.create(catData);
+    return await this.catsRepository.save(newCats);
   }
 }

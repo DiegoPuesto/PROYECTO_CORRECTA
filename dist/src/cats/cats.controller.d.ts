@@ -3,4 +3,5 @@ export declare class CatsController {
     private readonly catsService;
     constructor(catsService: CatsService);
     findAll(): Promise<import("./cat.entity").Cat[]>;
+    create(body: any): Promise<import("./cat.entity").Cat[]>;
 }

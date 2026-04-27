@@ -24,6 +24,10 @@ let CatsService = class CatsService {
     async findAll() {
         return await this.catsRepository.find();
     }
+    async create(catData) {
+        const newCats = this.catsRepository.create(catData);
+        return await this.catsRepository.save(newCats);
+    }
 };
 exports.CatsService = CatsService;
 exports.CatsService = CatsService = __decorate([
