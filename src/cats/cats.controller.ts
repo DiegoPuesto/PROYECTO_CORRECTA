@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBody } from '@nestjs/swagger'; // Asegúrate de importar ApiBody
 import { CatsService } from './cats.service';
 
-@ApiTags('cats') // Esto agrupa los endpoints bajo "cats" en la UI
+@ApiTags('cats')
 @Controller('cats')
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
@@ -15,6 +15,16 @@ export class CatsController {
 
   @Post()
   @ApiOperation({ summary: 'Crear un nuevo gato' })
+  @ApiBody({ // Esto crea la interfaz para que rellenes los datos
+    schema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        age: { type: 'number' },
+        breed: { type: 'string' },
+      },
+    },
+  })
   async create(@Body() body: any) {
     return await this.catsService.create(body);
   }
