@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-// Importamos nuestros módulos
 import { CatsModule } from './cats/cats.module';
 import { UsersModule } from './users/users.module';
 import { BreedsModule } from './breeds/breed.module';
@@ -29,8 +27,11 @@ import { BreedsModule } from './breeds/breed.module';
         synchronize: true,
       }),
     }),
-    
-    CatsModule, // <--- Registro del módulo añadido
+    CatsModule,
+    UsersModule,
+    BreedsModule,
   ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

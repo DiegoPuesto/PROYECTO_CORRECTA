@@ -9,6 +9,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BreedsService = void 0;
 const common_1 = require("@nestjs/common");
 let BreedsService = class BreedsService {
+    findAll() {
+        return [];
+    }
 };
 exports.BreedsService = BreedsService;
 exports.BreedsService = BreedsService = __decorate([

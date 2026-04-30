@@ -11,6 +11,8 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const cats_module_1 = require("./cats/cats.module");
+const users_module_1 = require("./users/users.module");
+const breed_module_1 = require("./breeds/breed.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -35,7 +37,11 @@ exports.AppModule = AppModule = __decorate([
                 }),
             }),
             cats_module_1.CatsModule,
+            users_module_1.UsersModule,
+            breed_module_1.BreedsModule,
         ],
+        controllers: [],
+        providers: [],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
