@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CatsModule } from './cats/cats.module'; // <--- Importación añadida
+
+// Importamos nuestros módulos
+import { CatsModule } from './cats/cats.module';
+import { UsersModule } from './users/users.module';
+import { BreedsModule } from './breeds/breed.module';
 
 @Module({
   imports: [

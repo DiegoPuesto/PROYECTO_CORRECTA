@@ -9,34 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cat = void 0;
+exports.Breed = void 0;
 const typeorm_1 = require("typeorm");
-const breed_entity_1 = require("../breeds/breed.entity");
-const user_entity_1 = require("../users/user.entity");
-let Cat = class Cat {
+const cat_entity_1 = require("../cats/cat.entity");
+let Breed = class Breed {
 };
-exports.Cat = Cat;
+exports.Breed = Breed;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Cat.prototype, "id", void 0);
+], Breed.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ unique: true }),
+    __metadata("design:type", String)
+], Breed.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => cat_entity_1.Cat, (cat) => cat.breed),
+    __metadata("design:type", Array)
+], Breed.prototype, "cats", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Cat.prototype, "externalId", void 0);
+    __metadata("design:type", Number)
+], Breed.prototype, "child_friendly", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Cat.prototype, "nickname", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => breed_entity_1.Breed, (breed) => breed.cats, { cascade: true, eager: true }),
-    __metadata("design:type", breed_entity_1.Breed)
-], Cat.prototype, "breed", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.pets, { nullable: true }),
-    __metadata("design:type", user_entity_1.User)
-], Cat.prototype, "user", void 0);
-exports.Cat = Cat = __decorate([
-    (0, typeorm_1.Entity)('cats')
-], Cat);
-//# sourceMappingURL=cat.entity.js.map
+    __metadata("design:type", Number)
+], Breed.prototype, "energy_level", void 0);
+exports.Breed = Breed = __decorate([
+    (0, typeorm_1.Entity)('breeds')
+], Breed);
+//# sourceMappingURL=breed.entity.js.map

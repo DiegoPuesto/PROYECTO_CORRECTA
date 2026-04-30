@@ -6,21 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersModule = void 0;
+exports.BreedsModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const users_service_1 = require("./users.service");
-const users_controller_1 = require("./users.controller");
-const user_entity_1 = require("./user.entity");
-let UsersModule = class UsersModule {
+const breed_service_1 = require("./breed.service");
+const breed_controller_1 = require("./breed.controller");
+const breed_entity_1 = require("./breed.entity");
+let BreedsModule = class BreedsModule {
 };
-exports.UsersModule = UsersModule;
-exports.UsersModule = UsersModule = __decorate([
+exports.BreedsModule = BreedsModule;
+exports.BreedsModule = BreedsModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User])],
-        controllers: [users_controller_1.UsersController],
-        providers: [users_service_1.UsersService],
-        exports: [users_service_1.UsersService],
+        imports: [typeorm_1.TypeOrmModule.forFeature([breed_entity_1.Breed])],
+        controllers: [breed_controller_1.BreedsController],
+        providers: [breed_service_1.BreedsService],
+        exports: [breed_service_1.BreedsService],
     })
-], UsersModule);
-//# sourceMappingURL=users.module.js.map
+], BreedsModule);
+//# sourceMappingURL=breed.module.js.map

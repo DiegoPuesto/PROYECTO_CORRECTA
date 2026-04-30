@@ -9,34 +9,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cat = void 0;
+exports.User = void 0;
 const typeorm_1 = require("typeorm");
-const breed_entity_1 = require("../breeds/breed.entity");
-const user_entity_1 = require("../users/user.entity");
-let Cat = class Cat {
+const role_enum_1 = require("./enums/role.enum");
+const cat_entity_1 = require("../cats/cat.entity");
+let User = class User {
 };
-exports.Cat = Cat;
+exports.User = User;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Cat.prototype, "id", void 0);
+], User.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
-], Cat.prototype, "externalId", void 0);
+], User.prototype, "email", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Cat.prototype, "nickname", void 0);
+], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => breed_entity_1.Breed, (breed) => breed.cats, { cascade: true, eager: true }),
-    __metadata("design:type", breed_entity_1.Breed)
-], Cat.prototype, "breed", void 0);
+    (0, typeorm_1.Column)({
+        type: 'enum',
+        enum: role_enum_1.UserRole,
+        default: role_enum_1.UserRole.UNREGISTERED,
+    }),
+    __metadata("design:type", String)
+], User.prototype, "role", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.pets, { nullable: true }),
-    __metadata("design:type", user_entity_1.User)
-], Cat.prototype, "user", void 0);
-exports.Cat = Cat = __decorate([
-    (0, typeorm_1.Entity)('cats')
-], Cat);
-//# sourceMappingURL=cat.entity.js.map
+    (0, typeorm_1.Column)({ default: false }),
+    __metadata("design:type", Boolean)
+], User.prototype, "isValidated", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => cat_entity_1.Cat, (cat) => cat.user),
+    __metadata("design:type", Array)
+], User.prototype, "pets", void 0);
+exports.User = User = __decorate([
+    (0, typeorm_1.Entity)('users')
+], User);
+//# sourceMappingURL=user.entity.js.map
