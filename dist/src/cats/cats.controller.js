@@ -16,6 +16,7 @@ exports.CatsController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const cats_service_1 = require("./cats.service");
+const create_cat_dto_1 = require("./dto/create-cat.dto");
 let CatsController = class CatsController {
     constructor(catsService) {
         this.catsService = catsService;
@@ -23,8 +24,8 @@ let CatsController = class CatsController {
     async findAll() {
         return await this.catsService.findAll();
     }
-    async create(body) {
-        return await this.catsService.create(body);
+    create(createCatDto) {
+        return this.catsService.create(createCatDto);
     }
 };
 exports.CatsController = CatsController;
@@ -48,10 +49,11 @@ __decorate([
             },
         },
     }),
+    (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:paramtypes", [create_cat_dto_1.CreateCatDto]),
+    __metadata("design:returntype", void 0)
 ], CatsController.prototype, "create", null);
 exports.CatsController = CatsController = __decorate([
     (0, swagger_1.ApiTags)('cats'),
