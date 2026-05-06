@@ -1,8 +1,14 @@
-import { UsersService } from 'src/users/users.service';
-import { RegisterDto } from 'src/users/dto/register.dto';
+import { UsersService } from '../users/users.service';
+import { JwtService } from '@nestjs/jwt';
+import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
 export declare class AuthService {
     private readonly usersService;
-    constructor(usersService: UsersService);
-    register({ password, email }: RegisterDto): Promise<RegisterDto & import("../users/user.entity").User>;
-    login(loginDto: any): Promise<string>;
+    private readonly jwtService;
+    constructor(usersService: UsersService, jwtService: JwtService);
+    register(registerDto: RegisterDto): Promise<import("../users/dto/register.dto").RegisterDto & import("../users/user.entity").User>;
+    login(loginDto: LoginDto): Promise<{
+        token: string;
+        email: string;
+    }>;
 }

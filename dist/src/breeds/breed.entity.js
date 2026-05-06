@@ -20,22 +20,22 @@ __decorate([
     __metadata("design:type", Number)
 ], Breed.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ unique: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Breed.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ name: 'child_friendly', default: 3 }),
+    __metadata("design:type", Number)
+], Breed.prototype, "childFriendly", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ name: 'energy_level', default: 3 }),
+    __metadata("design:type", Number)
+], Breed.prototype, "energyLevel", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => cat_entity_1.Cat, (cat) => cat.breed),
     __metadata("design:type", Array)
 ], Breed.prototype, "cats", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", Number)
-], Breed.prototype, "child_friendly", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", Number)
-], Breed.prototype, "energy_level", void 0);
 exports.Breed = Breed = __decorate([
-    (0, typeorm_1.Entity)('breeds')
+    (0, typeorm_1.Entity)()
 ], Breed);
 //# sourceMappingURL=breed.entity.js.map

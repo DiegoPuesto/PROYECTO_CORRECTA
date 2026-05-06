@@ -12,29 +12,45 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
+const jwt_1 = require("@nestjs/jwt");
 const bcrypt = require("bcrypt");
 let AuthService = class AuthService {
-    constructor(usersService) {
+    constructor(usersService, jwtService) {
         this.usersService = usersService;
+        this.jwtService = jwtService;
     }
-    async register({ password, email }) {
-        const user = await this.usersService.findOneByEmail(email);
-        if (user) {
-            throw new common_1.BadRequestException('El usuario ya existe');
+    async register(registerDto) {
+        const userExists = await this.usersService.findOneByEmail(registerDto.email);
+        if (userExists) {
+            throw new common_1.BadRequestException('El correo ya está registrado');
         }
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(registerDto.password, 10);
         return await this.usersService.create({
-            email,
+            email: registerDto.email,
             password: hashedPassword,
         });
     }
     async login(loginDto) {
-        return 'Pronto haremos el login';
+        const user = await this.usersService.findOneByEmail(loginDto.email);
+        if (!user) {
+            throw new common_1.UnauthorizedException('El email no es correcto');
+        }
+        const isPasswordValid = await bcrypt.compare(loginDto.password, user.password);
+        if (!isPasswordValid) {
+            throw new common_1.UnauthorizedException('La contraseña no es correcta');
+        }
+        const payload = { email: user.email, sub: user.id };
+        const token = await this.jwtService.signAsync(payload);
+        return {
+            token: token,
+            email: user.email,
+        };
     }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
+    __metadata("design:paramtypes", [users_service_1.UsersService,
+        jwt_1.JwtService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

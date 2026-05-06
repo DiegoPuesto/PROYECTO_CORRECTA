@@ -19,14 +19,15 @@ export class UsersService implements OnModuleInit {
   }
 
   // 2. Para que el Auth pueda buscar si el email ya existe
-  async findOneByEmail(email: string) {
-    return await this.userRepository.findOneBy({ email });
-  }
+async findOneByEmail(email: string) {
+  return await this.userRepository.findOneBy({ email });
+}
 
   // 3. Método findAll para que el controlador no de error
   async findAll() {
     return await this.userRepository.find();
   }
+  
 
   // 4. El Seeder que crea al admin al arrancar si no existe
   async onModuleInit() {

@@ -1,33 +1,53 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service'; // Necesitamos el servicio de usuarios para guardar
-import { RegisterDto } from 'src/users/dto/register.dto';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { UsersService } from '../users/users.service';
+import { JwtService } from '@nestjs/jwt';
+import { RegisterDto } from './dto/register.dto'; // <-- Asegúrate de que el import sea correcto
+import { LoginDto } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly usersService: UsersService, // Inyectamos el servicio de usuarios
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
   ) {}
 
-
-  async register({ password, email }: RegisterDto) {
-    // 1. Verificar si el usuario ya existe
-    const user = await this.usersService.findOneByEmail(email);
-
-    if (user) {
-      throw new BadRequestException('El usuario ya existe');
+  // 1. Método de Registro que le falta a tu controlador
+  async register(registerDto: RegisterDto) {
+    // Verificamos si el email ya existe
+    const userExists = await this.usersService.findOneByEmail(registerDto.email);
+    if (userExists) {
+      throw new BadRequestException('El correo ya está registrado');
     }
 
-    // 2. Encriptar la contraseña
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Encriptamos la contraseña antes de guardarla
+    const hashedPassword = await bcrypt.hash(registerDto.password, 10);
 
-    // 3. Crear el usuario en la base de datos
+    // Guardamos el usuario a través de UsersService
     return await this.usersService.create({
-      email,
-      password: hashedPassword, // Guardamos la contraseña encriptada!
+      email: registerDto.email,
+      password: hashedPassword,
     });
   }
-  async login(loginDto: any) {
-  return 'Pronto haremos el login';
-}
+
+  // 2. Tu método de Login (El que ya teníamos)
+  async login(loginDto: LoginDto) {
+    const user = await this.usersService.findOneByEmail(loginDto.email);
+    if (!user) {
+      throw new UnauthorizedException('El email no es correcto');
+    }
+
+    const isPasswordValid = await bcrypt.compare(loginDto.password, user.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('La contraseña no es correcta');
+    }
+
+    const payload = { email: user.email, sub: user.id };
+    const token = await this.jwtService.signAsync(payload);
+
+    return {
+      token: token,
+      email: user.email,
+    };
+  }
 }
