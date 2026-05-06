@@ -21,22 +21,22 @@ __decorate([
     __metadata("design:type", Number)
 ], Cat.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Cat.prototype, "externalId", void 0);
+], Cat.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Cat.prototype, "nickname", void 0);
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Cat.prototype, "age", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => breed_entity_1.Breed, (breed) => breed.cats, { cascade: true, eager: true }),
+    (0, typeorm_1.ManyToOne)(() => breed_entity_1.Breed, (breed) => breed.id, { eager: true }),
     __metadata("design:type", breed_entity_1.Breed)
 ], Cat.prototype, "breed", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.pets, { nullable: true }),
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.id),
     __metadata("design:type", user_entity_1.User)
 ], Cat.prototype, "user", void 0);
 exports.Cat = Cat = __decorate([
-    (0, typeorm_1.Entity)('cats')
+    (0, typeorm_1.Entity)()
 ], Cat);
 //# sourceMappingURL=cat.entity.js.map

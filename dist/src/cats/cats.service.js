@@ -18,15 +18,19 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const cat_entity_1 = require("./cat.entity");
 let CatsService = class CatsService {
-    constructor(catsRepository) {
-        this.catsRepository = catsRepository;
+    constructor(catRepository) {
+        this.catRepository = catRepository;
+    }
+    async create(createCatDto) {
+        const cat = this.catRepository.create({
+            name: createCatDto.name,
+            age: createCatDto.age,
+            breed: { id: 1 },
+        });
+        return await this.catRepository.save(cat);
     }
     async findAll() {
-        return await this.catsRepository.find();
-    }
-    async create(catData) {
-        const newCats = this.catsRepository.create(catData);
-        return await this.catsRepository.save(newCats);
+        return await this.catRepository.find();
     }
 };
 exports.CatsService = CatsService;

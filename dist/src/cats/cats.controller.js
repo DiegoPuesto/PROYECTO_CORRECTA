@@ -14,47 +14,34 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CatsController = void 0;
 const common_1 = require("@nestjs/common");
-const swagger_1 = require("@nestjs/swagger");
 const cats_service_1 = require("./cats.service");
 const create_cat_dto_1 = require("./dto/create-cat.dto");
+const swagger_1 = require("@nestjs/swagger");
 let CatsController = class CatsController {
     constructor(catsService) {
         this.catsService = catsService;
     }
-    async findAll() {
-        return await this.catsService.findAll();
-    }
     create(createCatDto) {
         return this.catsService.create(createCatDto);
+    }
+    findAll() {
+        return this.catsService.findAll();
     }
 };
 exports.CatsController = CatsController;
 __decorate([
-    (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Obtener todos los gatos' }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], CatsController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Post)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Crear un nuevo gato', }),
-    (0, swagger_1.ApiBody)({
-        schema: {
-            type: 'object',
-            properties: {
-                name: { type: 'string' },
-                age: { type: 'number' },
-                breed: { type: 'string' },
-            },
-        },
-    }),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_cat_dto_1.CreateCatDto]),
     __metadata("design:returntype", void 0)
 ], CatsController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], CatsController.prototype, "findAll", null);
 exports.CatsController = CatsController = __decorate([
     (0, swagger_1.ApiTags)('cats'),
     (0, common_1.Controller)('cats'),

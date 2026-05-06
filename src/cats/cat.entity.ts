@@ -1,24 +1,23 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Breed } from '../breeds/breed.entity';
-import { User } from '../users/user.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Breed } from '../breeds/breed.entity'; // Asegura que la ruta sea correcta
+import { User } from '../users/user.entity';   // Asegura que la ruta sea correcta
 
-@Entity('cats')
+@Entity()
 export class Cat {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  externalId: string; // ID que viene de la API externa
+  @Column()
+  name: string;
 
-  @Column({ nullable: true })
-  nickname: string; // El nombre que le pone el usuario al adoptarlo
+  @Column()
+  age: number;
 
-  // Muchos gatos tienen una misma raza
-  @ManyToOne(() => Breed, (breed) => breed.cats, { cascade: true, eager: true })
+  // 1. Relación ManyToOne con Breed (Muchos gatos tienen una raza)
+  @ManyToOne(() => Breed, (breed) => breed.id, { eager: true })
   breed: Breed;
 
-  // Muchos gatos pueden pertenecer a un usuario (dueño)
-  // Nullable porque al principio están "libres" en la BD
-  @ManyToOne(() => User, (user) => user.pets, { nullable: true })
+  // 2. Relación ManyToOne con User (Muchos gatos pertenecen a un usuario)
+  @ManyToOne(() => User, (user) => user.id)
   user: User;
 }

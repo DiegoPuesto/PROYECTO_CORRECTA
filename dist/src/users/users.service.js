@@ -18,6 +18,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./user.entity");
 const role_enum_1 = require("./enums/role.enum");
+const bcrypt = require("bcrypt");
 let UsersService = class UsersService {
     constructor(userRepository) {
         this.userRepository = userRepository;
@@ -28,12 +29,16 @@ let UsersService = class UsersService {
     async findOneByEmail(email) {
         return await this.userRepository.findOneBy({ email });
     }
+    async findAll() {
+        return await this.userRepository.find();
+    }
     async onModuleInit() {
         const adminExists = await this.findOneByEmail('admin@admin.com');
         if (!adminExists) {
+            const hashedPassword = await bcrypt.hash('password123', 10);
             const admin = this.userRepository.create({
                 email: 'admin@admin.com',
-                password: 'password123',
+                password: hashedPassword,
                 role: role_enum_1.UserRole.ADMIN,
             });
             await this.userRepository.save(admin);

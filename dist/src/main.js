@@ -13,11 +13,11 @@ async function bootstrap() {
     }));
     const config = new swagger_1.DocumentBuilder()
         .setTitle('API de Gatos')
-        .setDescription('Documentación de la API para gestionar gatos')
+        .setDescription('Documentación de la API para gestionar gatos y usuarios')
         .setVersion('1.0')
         .addTag('cats')
+        .addTag('auth')
         .addTag('users')
-        .addTag('breeds')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, document);

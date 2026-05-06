@@ -4,5 +4,5 @@ export declare class AuthService {
     private readonly usersService;
     constructor(usersService: UsersService);
     register({ password, email }: RegisterDto): Promise<RegisterDto & import("../users/user.entity").User>;
-    login(): string;
+    login(loginDto: any): Promise<string>;
 }

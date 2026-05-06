@@ -28,8 +28,8 @@ let AuthService = class AuthService {
             password: hashedPassword,
         });
     }
-    login() {
-        return 'Este método hará el login más adelante';
+    async login(loginDto) {
+        return 'Pronto haremos el login';
     }
 };
 exports.AuthService = AuthService;

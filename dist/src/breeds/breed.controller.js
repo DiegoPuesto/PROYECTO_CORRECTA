@@ -15,32 +15,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BreedsController = void 0;
 const common_1 = require("@nestjs/common");
 const breed_service_1 = require("./breed.service");
+const create_breed_dto_1 = require("./dto/create-breed.dto");
 const swagger_1 = require("@nestjs/swagger");
 let BreedsController = class BreedsController {
     constructor(breedsService) {
         this.breedsService = breedsService;
     }
+    create(createBreedDto) {
+        return this.breedsService.create(createBreedDto);
+    }
     findAll() {
         return this.breedsService.findAll();
     }
-    create(createBreedDto) {
-        return 'Esta ruta creará una raza pronto';
-    }
 };
 exports.BreedsController = BreedsController;
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_breed_dto_1.CreateBreedDto]),
+    __metadata("design:returntype", void 0)
+], BreedsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], BreedsController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], BreedsController.prototype, "create", null);
 exports.BreedsController = BreedsController = __decorate([
     (0, swagger_1.ApiTags)('breeds'),
     (0, common_1.Controller)('breeds'),

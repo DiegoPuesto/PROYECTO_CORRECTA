@@ -1,13 +1,22 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common'; // 1. Asegúrate de importar Post y Body
 import { UsersService } from './users.service';
+import { RegisterDto } from './dto/register.dto'; // 2. Importamos el DTO de registro para usarlo aquí
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
-  userRepository: any;
   constructor(private readonly usersService: UsersService) {}
 
-async findAll() {
-  return await this.userRepository.find();
-}};
+  // El GET que ya te funciona
+  @Get()
+  findAll() {
+    return this.usersService.findAll();
+  }
+
+  // --- AÑADE ESTE MÉTODO POST ---
+  @Post()
+  create(@Body() registerDto: RegisterDto) {
+    return this.usersService.create(registerDto);
+  }
+}

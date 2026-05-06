@@ -2,21 +2,27 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cat } from './cat.entity';
+import { CreateCatDto } from './dto/create-cat.dto';
 
 @Injectable()
 export class CatsService {
   constructor(
     @InjectRepository(Cat)
-    private catsRepository: Repository<Cat>,
+    private readonly catRepository: Repository<Cat>,
   ) {}
 
-  async findAll(): Promise<Cat[]> {
-    return await this.catsRepository.find();
+  async create(createCatDto: CreateCatDto) {
+    // Creamos el objeto del gato mapeando breed como un objeto parcial de tipo Breed
+    const cat = this.catRepository.create({
+      name: createCatDto.name,
+      age: createCatDto.age,
+      breed: { id: 1 } as any, // Asume temporalmente la Raza con ID 1 
+    });
+
+    return await this.catRepository.save(cat);
   }
 
-  // Asegúrate de que este método esté dentro de las llaves { } de la clase CatsService
-  async create(catData: any): Promise<Cat[]> {
-    const newCats:Cat[] = this.catsRepository.create(catData);
-    return await this.catsRepository.save(newCats);
+  async findAll() {
+    return await this.catRepository.find();
   }
 }

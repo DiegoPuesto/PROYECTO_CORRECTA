@@ -1,18 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MinLength, IsInt, IsPositive, IsOptional } from 'class-validator';
+import { IsInt, IsPositive, IsString, MinLength } from 'class-validator';
 
 export class CreateCatDto {
-    @ApiProperty({ example: 'Maya' })
+  @ApiProperty({
+    description: 'El nombre del gato',
+    example: 'Pelusa',
+  })
   @IsString()
   @MinLength(3)
   name: string;
 
-
+  @ApiProperty({
+    description: 'La edad del gato',
+    example: 3,
+  })
   @IsInt()
   @IsPositive()
   age: number;
 
+  @ApiProperty({
+    description: 'La raza del gato',
+    example: 'Persa',
+  })
   @IsString()
-  @IsOptional()
-  breed?: string; // El '?' significa que es opcional
+  breed: string;
 }

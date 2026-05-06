@@ -7,5 +7,6 @@ export declare class UsersService implements OnModuleInit {
     constructor(userRepository: Repository<User>);
     create(createDto: RegisterDto): Promise<RegisterDto & User>;
     findOneByEmail(email: string): Promise<User>;
+    findAll(): Promise<User[]>;
     onModuleInit(): Promise<void>;
 }

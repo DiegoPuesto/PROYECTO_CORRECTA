@@ -9,36 +9,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateCatDto = void 0;
+exports.CreateBreedDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-class CreateCatDto {
+class CreateBreedDto {
 }
-exports.CreateCatDto = CreateCatDto;
+exports.CreateBreedDto = CreateBreedDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'El nombre del gato',
-        example: 'Pelusa',
-    }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.MinLength)(3),
-    __metadata("design:type", String)
-], CreateCatDto.prototype, "name", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'La edad del gato',
-        example: 3,
-    }),
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsPositive)(),
-    __metadata("design:type", Number)
-], CreateCatDto.prototype, "age", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'La raza del gato',
+        description: 'El nombre de la raza de gato',
         example: 'Persa',
     }),
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(3, { message: 'El nombre de la raza debe tener al menos 3 caracteres' }),
     __metadata("design:type", String)
-], CreateCatDto.prototype, "breed", void 0);
-//# sourceMappingURL=create-cat.dto.js.map
+], CreateBreedDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Qué tan amigable es con los niños (escala del 1 al 5)',
+        example: 5,
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.Max)(5),
+    __metadata("design:type", Number)
+], CreateBreedDto.prototype, "childFriendly", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Nivel de energía del gato (escala del 1 al 5)',
+        example: 2,
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.Max)(5),
+    __metadata("design:type", Number)
+], CreateBreedDto.prototype, "energyLevel", void 0);
+//# sourceMappingURL=create-breed.dto.js.map

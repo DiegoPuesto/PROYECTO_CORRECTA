@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm'; // Importa esto
-import { CatsController } from './cats.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatsService } from './cats.service';
-import { Cat } from './cat.entity';
+import { CatsController } from './cats.controller';
+import { Cat } from './cat.entity'; // Asegura esta ruta
+
 @Module({
-  imports: [TypeOrmModule.forFeature([Cat])], // <--- ¡ESTO ES LO MÁS IMPORTANTE!
+  imports: [TypeOrmModule.forFeature([Cat])], // <-- Registramos la entidad
   controllers: [CatsController],
   providers: [CatsService],
 })
