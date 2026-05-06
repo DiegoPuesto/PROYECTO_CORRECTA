@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatsService } from './cats.service';
 import { CatsController } from './cats.controller';
-import { Cat } from './cat.entity'; // Asegura esta ruta
+import { Cat } from './cat.entity'; 
 
 @Module({
   imports: [TypeOrmModule.forFeature([Cat])], // <-- Registramos la entidad

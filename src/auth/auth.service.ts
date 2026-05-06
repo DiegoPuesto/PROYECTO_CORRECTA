@@ -12,7 +12,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  // 1. Método de Registro que le falta a tu controlador
+  // 1. Método de Registro 
   async register(registerDto: RegisterDto) {
     // Verificamos si el email ya existe
     const userExists = await this.usersService.findOneByEmail(registerDto.email);
@@ -30,7 +30,7 @@ export class AuthService {
     });
   }
 
-  // 2. Tu método de Login (El que ya teníamos)
+  // 2. El método de Login
   async login(loginDto: LoginDto) {
     const user = await this.usersService.findOneByEmail(loginDto.email);
     if (!user) {

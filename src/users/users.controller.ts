@@ -8,13 +8,12 @@ import { ApiTags } from '@nestjs/swagger';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  // El GET que ya te funciona
+
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
-  // --- AÑADE ESTE MÉTODO POST ---
   @Post()
   create(@Body() registerDto: RegisterDto) {
     return this.usersService.create(registerDto);

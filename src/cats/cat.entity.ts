@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Breed } from '../breeds/breed.entity'; // Asegura que la ruta sea correcta
-import { User } from '../users/user.entity';   // Asegura que la ruta sea correcta
+import { Breed } from '../breeds/breed.entity';
+import { User } from '../users/user.entity';   
 
 @Entity()
 export class Cat {

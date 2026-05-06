@@ -28,7 +28,6 @@ async findOneByEmail(email: string) {
     return await this.userRepository.find();
   }
   
-
   // 4. El Seeder que crea al admin al arrancar si no existe
   async onModuleInit() {
     const adminExists = await this.findOneByEmail('admin@admin.com');

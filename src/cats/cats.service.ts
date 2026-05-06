@@ -16,7 +16,7 @@ export class CatsService {
     const cat = this.catRepository.create({
       name: createCatDto.name,
       age: createCatDto.age,
-      breed: { id: 1 } as any, // Asume temporalmente la Raza con ID 1 
+      breed: { id: 1 } as any, 
     });
 
     return await this.catRepository.save(cat);
