@@ -17,11 +17,28 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./user.entity");
+const role_enum_1 = require("./enums/role.enum");
 let UsersService = class UsersService {
-    constructor(usersRepository) {
-        this.usersRepository = usersRepository;
+    constructor(userRepository) {
+        this.userRepository = userRepository;
     }
-    findAll() { return this.usersRepository.find(); }
+    async create(createDto) {
+        return await this.userRepository.save(createDto);
+    }
+    async findOneByEmail(email) {
+        return await this.userRepository.findOneBy({ email });
+    }
+    async onModuleInit() {
+        const adminExists = await this.findOneByEmail('admin@admin.com');
+        if (!adminExists) {
+            const admin = this.userRepository.create({
+                email: 'admin@admin.com',
+                password: 'password123',
+                role: role_enum_1.UserRole.ADMIN,
+            });
+            await this.userRepository.save(admin);
+        }
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([

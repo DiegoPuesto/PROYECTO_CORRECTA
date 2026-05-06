@@ -38,7 +38,7 @@ __decorate([
 ], CatsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Crear un nuevo gato' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Crear un nuevo gato', }),
     (0, swagger_1.ApiBody)({
         schema: {
             type: 'object',
